@@ -1,7 +1,10 @@
 package io.github.mikan.fotf.examples.cha
 
+import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class BowlingGameTest {
     /** p367 A.2.1 関数を純粋に保つ */
@@ -33,5 +36,15 @@ class BowlingGameTest {
         val g3 = BowlingGameFP(listOf(5, 4))
         assertEquals(g1, g2)
         assertEquals(g1, g3)
+    }
+
+    /** p371 A.2.3 考えうる全ての入力に対処する */
+    @Test
+    fun testFPInvalidPins() {
+        val game = BowlingGameFP(emptyList())
+        assertThrows<IllegalStateException> { game.roll3(0) }
+        assertDoesNotThrow { game.roll3(1) }
+        assertEquals(game, game.roll4(0))
+        assertNotEquals(game, game.roll4(1))
     }
 }
