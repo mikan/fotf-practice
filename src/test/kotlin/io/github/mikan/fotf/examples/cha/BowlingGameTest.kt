@@ -24,4 +24,14 @@ class BowlingGameTest {
         // 予想:BowlingGameMutable(rolls=[5, 4])
         // 実際:BowlingGameMutable(rolls=[5, 4, 4])
     }
+
+    /** p369 A.2.2 可変の型を信頼しない */
+    @Test
+    fun testFPRoll2() {
+        val g1 = BowlingGameFP(emptyList()).roll2(5).roll2(4)
+        val g2 = BowlingGameFP(listOf(5)).roll2(4)
+        val g3 = BowlingGameFP(listOf(5, 4))
+        assertEquals(g1, g2)
+        assertEquals(g1, g3)
+    }
 }
