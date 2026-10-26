@@ -15,7 +15,7 @@ fun checkMajority(userName: String): Boolean {
 }
 
 fun checkMajority2(userName: String): Boolean =
-    getUser(userName).run {
+    getUser(userName).run { // 書籍では apply になっているがコンパイルできない
         currentYear - dateOfBirth.year < 21
     }
 
